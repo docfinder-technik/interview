@@ -1,0 +1,100 @@
+<?php
+
+namespace app\models;
+
+use Yii;
+
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
+
+class User extends ActiveRecord implements IdentityInterface
+{
+    public static function tableName()
+    {
+        return "user";
+    }
+
+    const SCENARIO_LOGIN = "login";
+
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_LOGIN => ["username", "password"],
+        ];
+    }
+
+    public function rules()
+    {
+        return [
+            [["username", "password"], "required"],
+            ["email", "email"]
+        ];
+    }
+
+    /**
+     * Finds an identity by the given ID.
+     *
+     * @param string|int $id the ID to be looked for
+     * @return IdentityInterface|null the identity object that matches the given ID.
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    /**
+     * Finds an identity by the given token.
+     *
+     * @param string $token the token to be looked for
+     * @return IdentityInterface|null the identity object that matches the given token.
+     */
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return static::findOne(["access_token" => $token]);
+    }
+
+    /**
+     * Finds an identity by the given ID.
+     *
+     * @param string $username the Username to be looked for
+     * @return IdentityInterface|null the identity object that matches the given Username.
+     */
+    public static function findByUsername($username)
+    {
+        return static::findOne(["username" => $username]);
+    }
+
+    /**
+     * @return int|string current user ID
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string current user auth key
+     */
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
+
+    /**
+     * @param string $authKey
+     * @return bool if auth key is valid for current user
+     */
+    public function validateAuthKey($authKey)
+    {
+        return $this->getAuthKey() === $authKey;
+    }
+
+    /**
+     * @param string $password
+     * @return bool if password is valid for current user
+     */
+    public function validatePassword($password)
+    {
+        return Yii::$app->getSecurity()->validatePassword($password, $this->password);
+    }
+}
