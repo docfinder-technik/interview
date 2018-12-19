@@ -28,6 +28,20 @@ Now you should be able to reach the website in the browser via http://localhost:
 
 *(If you want to use a server software like Apache or Nginx please look at the respective [Yii2 Documentation](http://www.yiiframework.com/doc-2.0/guide-start-installation.html#configuring-web-servers).)*
 
+### Docker
+
+Alternatively this app can also be started via docker, just build the image first:
+```bash
+docker build -t df2-interview:latest .
+```
+
+Then run it:
+```bash
+docker run -d -p 80:80 --name df2-interview df2-interview:latest
+```
+
+Now the website should be reachable at localhost.
+
 ## Overview
 Your task is to extend the provided skeleton-app (a very simple blog). We already provided the user-login, a basic frontend as well as an admin-panel. We also implemented a simple CRUD-functionality in the admin module.
 
