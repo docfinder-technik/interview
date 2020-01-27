@@ -6,6 +6,9 @@ $config = [
     "id" => "basic",
     "basePath" => dirname(__DIR__),
     "bootstrap" => ["log"],
+    'aliases' => [
+        '@bower' => '@vendor/yidas/yii2-bower-asset/bower'
+    ],
     "modules" => [
         "admin" => [
             "class" => "app\modules\admin\Module",

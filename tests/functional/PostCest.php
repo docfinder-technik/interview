@@ -3,22 +3,14 @@
 use app\tests\unit\fixtures\UserFixture;
 use app\tests\unit\fixtures\PostFixture;
 
-use app\models\User;
-
 class PostCest
 {
-    public function _before(FunctionalTester $I)
+    public function _fixtures()
     {
-        $I->haveFixtures([
-            'users' => [
-                'class' => UserFixture::className(),
-                'dataFile' => codecept_root_dir() . 'tests/unit/fixtures/data/user.php'
-            ],
-            'posts' => [
-                'class' => PostFixture::className(),
-                'dataFile' => codecept_root_dir() . 'tests/unit/fixtures/data/post.php'
-            ],
-        ]);
+        return [
+            'users' => UserFixture::class,
+            'posts' => PostFixture::class,
+        ];
     }
 
     public function index(\FunctionalTester $I)

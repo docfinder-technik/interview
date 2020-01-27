@@ -1,19 +1,22 @@
 <?php
 namespace tests\models;
 
-use yii\codeception\DbTestCase;
 use app\tests\unit\fixtures\PostFixture;
 
 use app\models\Post;
+use app\tests\unit\fixtures\UserFixture;
+use Codeception\Test\Unit;
 
-class PostTest extends DbTestCase
+class PostTest extends Unit
 {
-    public function fixtures()
+    public function _fixtures()
     {
         return [
-            'posts' => PostFixture::className(),
+            'users' => UserFixture::class,
+            'posts' => PostFixture::class,
         ];
     }
+
 
     public function testValidatePost_NoEntries()
     {

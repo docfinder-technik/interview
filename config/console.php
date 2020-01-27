@@ -25,14 +25,8 @@ $config = [
     "params" => $params,
     "aliases" => [
         "@tests" => __DIR__."/../tests",
-    ]
-    /*
-    "controllerMap" => [
-        "fixture" => [ // Fixture generation command line.
-            "class" => "yii\faker\FixtureController",
-        ],
+        '@bower' => '@vendor/yidas/yii2-bower-asset/bower'
     ],
-    */
 ];
 
 if (YII_ENV_DEV) {
